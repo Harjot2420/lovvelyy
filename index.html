@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>For My Beautiful Queen</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Great+Vibes&family=Quicksand:wght@400;700&display=swap');
+  * {
+    margin: 0; padding: 0; box-sizing: border-box;
+  }
+  html, body {
+    height: 100%;
+    font-family: 'Quicksand', sans-serif;
+    background: linear-gradient(135deg, #ffccd5 0%, #ffe4e9 25%, #ffc1cc 50%, #ffafba 75%, #ffccd5 100%);
+    overflow-x: hidden;
+    color: #800020;
+    position: relative;
+  }
+  header {
+    position: relative;
+    font-family: 'Great Vibes', cursive;
+    font-size: 3.5rem;
+    font-weight: 700;
+    text-align: center;
+    margin: 3rem 1rem 2rem 1rem;
+    color: #b2224a;
+    text-shadow:
+      2px 2px 8px rgba(255, 182, 193, 0.8),
+      0 0 15px #ff66a3,
+      0 0 3px #ff1478;
+    animation: pulseGlow 3s ease-in-out infinite alternate;
+    user-select: none;
+    z-index: 10;
+  }
+  @keyframes pulseGlow {
+    0% {
+      text-shadow:
+        2px 2px 8px rgba(255, 182, 193, 0.8),
+        0 0 15px #ff66a3,
+        0 0 3px #ff1478;
+      color: #b2224a;
+      transform: scale(1);
+    }
+    100% {
+      text-shadow:
+        4px 4px 13px rgba(255, 105, 180, 1),
+        0 0 30px #ff3a7f,
+        0 0 7px #ff1478;
+      color: #ff1493;
+      transform: scale(1.05);
+    }
+  }
+  main {
+    position: relative;
+    z-index: 10;
+    width: 90%;
+    max-width: 1200px;
+    flex-grow: 1;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1rem;
+    padding-bottom: 3rem;
+    margin: auto;
+  }
+  .message {
+    background: #ffccd5cc;
+    border-radius: 20px 20px 50% 50% / 60% 60% 40% 40%;
+    box-shadow: 0 0 10px 2px rgba(255, 20, 147, 0.5);
+    padding: 1rem 1.5rem;
+    width: calc(20% - 1rem);
+    min-width: 160px;
+    font-size: 1.1rem;
+    font-style: italic;
+    font-weight: 600;
+    text-align: center;
+    color: #800020;
+    position: relative;
+    cursor: default;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  .message:hover {
+    transform: scale(1.15) rotate(-2deg);
+    box-shadow: 0 0 20px 4px #ff149389;
+    z-index: 20;
+  }
+  .message::before {
+    content: "🌹";
+    position: absolute;
+    top: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 1.8rem;
+    filter: drop-shadow(0 0 1px #b2224a);
+  }
+  @media(max-width: 900px) {
+    header {
+      font-size: 2.5rem;
+      margin: 2rem 1rem 1.5rem 1rem;
+    }
+    .message {
+      width: calc(33% - 1rem);
+      font-size: 1rem;
+    }
+  }
+  @media(max-width: 600px) {
+    .message {
+      width: calc(50% - 1rem);
+      font-size: 0.95rem;
+      padding: 0.75rem 1rem;
+    }
+  }
+  @media(max-width: 400px) {
+    header {
+      font-size: 2rem;
+    }
+    .message {
+      width: 100%;
+      font-size: 0.9rem;
+    }
+  }
+  #roseCanvas {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100vw;
+    height: 100vh;
+    pointer-events: none;
+    z-index: 1;
+    user-select: none;
+  }
+</style>
+</head>
+<body>
+  <canvas id="roseCanvas"></canvas>
+  <header>i loveeeee youuuu myyy beautifulllll queennnn</header>
+  <main>
+    <div class="message">You are the rose in my garden of life</div>
+    <div class="message">Every moment with you is a blooming dream</div>
+    <div class="message">My heart beats for you endlessly</div>
+    <div class="message">Your smile is my favorite sunrise</div>
+    <div class="message">Forever your devoted admirer</div>
+    <div class="message">You’re my sweetest melody</div>
+    <div class="message">Love you to the moon and back a thousand times</div>
+    <div class="message">In your eyes, I find my paradise</div>
+    <div class="message">You make life rosy and bright</div>
+    <div class="message">Together, we’re an eternal bouquet of love</div>
+    <div class="message">Your touch is the warmest embrace</div>
+    <div class="message">My queen, my forever</div>
+    <div class="message">Our love blossoms every day</div>
+    <div class="message">With you, my world is in full bloom</div>
+    <div class="message">You are the petal in my heart’s flower</div>
+    <div class="message">Love wrapped in roses and dreams</div>
+    <div class="message">You’re the spark that lights my soul</div>
+    <div class="message">Hand in hand, heart to heart</div>
+    <div class="message">Your laughter is my favorite song</div>
+    <div class="message">My love, my rose garden</div>
+  </main>
+<script>
+(() => {
+  const canvas = document.getElementById('roseCanvas');
+  const ctx = canvas.getContext('2d');
+  let width, height, roses = [];
+
+  function resize() {
+    width = window.innerWidth;
+    height = window.innerHeight;
+    canvas.width = width;
+    canvas.height = height;
+  }
+
+  class Rose {
+    constructor() {
+      this.reset();
+    }
+    reset() {
+      this.x = Math.random() * width;
+      this.y = Math.random() * height;
+      this.size = 5 + Math.random() * 5;
+      this.speedY = 0.1 + Math.random() * 0.3;
+      this.speedX = (Math.random() - 0.5) * 0.1;
+      this.opacity = 0.1 + Math.random() * 0.4;
+      this.color1 = `rgba(255, ${Math.floor(20 + Math.random() * 60)}, ${Math.floor(80 + Math.random() * 100)}, ${this.opacity})`;
+      this.color2 = `rgba(255, 20, 147, ${this.opacity})`;
+      this.angle = Math.random() * Math.PI * 2;
+      this.angleSpeed = (Math.random() - 0.5) * 0.02;
+    }
+    draw(ctx) {
+      ctx.save();
+      ctx.translate(this.x, this.y);
+      ctx.rotate(this.angle);
+      let grd = ctx.createRadialGradient(0, 0, this.size * 0.3, 0, 0, this.size);
+      grd.addColorStop(0, this.color2);
+      grd.addColorStop(1, this.color1);
+      ctx.fillStyle = grd;
+
+      ctx.beginPath();
+      for (let i = 0; i < 5; i++) {
+        let angle = i * (2 * Math.PI / 5);
+        ctx.lineTo(Math.cos(angle) * this.size, Math.sin(angle) * this.size);
+        ctx.lineTo(Math.cos(angle + Math.PI/10) * this.size * 0.5, Math.sin(angle + Math.PI/10) * this.size * 0.5);
+      }
+      ctx.closePath();
+      ctx.fill();
+
+      ctx.restore();
+    }
+    update() {
+      this.x += this.speedX;
+      this.y += this.speedY;
+      this.angle += this.angleSpeed;
+
+      if (this.y > height + this.size) {
+        this.x = Math.random() * width;
+        this.y = -this.size;
+        this.angle = Math.random() * Math.PI * 2;
+      }
+      if (this.x > width + this.size) this.x = -this.size;
+      else if (this.x < -this.size) this.x = width + this.size;
+    }
+  }
+
+  function init() {
+    resize();
+    roses = [];
+    let count = 1000;
+    for (let i = 0; i < count; i++) {
+      roses.push(new Rose());
+    }
+  }
+
+  function animate() {
+    ctx.clearRect(0, 0, width, height);
+    roses.forEach(r => {
+      r.update();
+      r.draw(ctx);
+    });
+    requestAnimationFrame(animate);
+  }
+
+  window.addEventListener('resize', () => {
+    resize();
+  });
+
+  init();
+  animate();
+})();
+</script>
+</body>
+</html>
+
